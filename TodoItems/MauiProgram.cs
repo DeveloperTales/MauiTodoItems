@@ -1,6 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using TodoItems.Pages;
-using TodoItems.ViewModels;
+﻿using TodoItems.Services;
+using TodoItems.Views;
 
 namespace TodoItems;
 
@@ -18,15 +17,17 @@ public static class MauiProgram
 			});
 
 		builder.Services.AddServices();
+		builder.Services.AddTodoServices();
 
-		return builder.Build();
+        return builder.Build();
 	}
 
 	private static void AddServices(this IServiceCollection services)
 	{
-        services.AddTransient<TodoItemsPage>();
-        services.AddTransient<TodoItemsViewModel>();
+        services.AddSingleton<TodoItemsPage>();
         services.AddTransient<TodoItemPage>();
-		services.AddTransient<TodoItemViewModel>();
-	}
+        services.AddSingleton<QuotesPage>();
+        services.AddTransient<QuotePage>();
+		services.AddSingleton<SettingsPage>();
+    }
 }

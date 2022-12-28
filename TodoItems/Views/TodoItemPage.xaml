@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TodoItems.Views.TodoItemPage"
+             xmlns:viewmodels="clr-namespace:TodoItems.Services.ViewModels;assembly=TodoItems.Services"
+             x:DataType="viewmodels:TodoItemViewModel"
+             Title="{Binding Title}">
+    <VerticalStackLayout Padding="10">
+        <Label 
+            Text="Todo Decription"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Entry
+            Margin="0,0,0,20"/>
+        <Grid 
+            
+            ColumnDefinitions="*, Auto"
+            RowDefinitions="Auto">
+            <Label 
+                Grid.Column="0"
+                Grid.Row="0"
+                Text="Is Completed: "/>
+            <CheckBox
+                Grid.Column="1"
+                Grid.Row="0">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter
+                                Property="Color"
+                                Value="Red" />
+                            </VisualState.Setters>
+                        </VisualState>
+
+                        <VisualState x:Name="IsChecked">
+                            <VisualState.Setters>
+                                <Setter
+                                Property="Color"
+                                Value="Green" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+            </CheckBox>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

@@ -4,11 +4,38 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:TodoItems"
-    Shell.FlyoutBehavior="Disabled">
+    xmlns:views="clr-namespace:TodoItems.Views"
+    >
+
+    <FlyoutItem
+        Title="Home"
+        Route="home">
+        <Tab Title="Home">
+            <ShellContent
+                Title="Todos"
+                ContentTemplate="{DataTemplate views:TodoItemsPage}"
+                Route="todoItems"/>
+            <ShellContent
+                Title="Quotes"
+                ContentTemplate="{DataTemplate views:QuotesPage}"
+                Route="quotes"/>
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem
+        Title="Settings">
+        <ShellContent
+            Title="Settings"
+            ContentTemplate="{DataTemplate views:SettingsPage}" />
+    </FlyoutItem>
+    
+    <ShellContent
+        Title="Todo Item"
+        ContentTemplate="{DataTemplate views:TodoItemPage}"
+        Route="todoItem" />
 
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Title="Quote"
+        ContentTemplate="{DataTemplate views:QuotePage}"
+        Route="quote" />
 
 </Shell>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TodoItems.Views.TodoItemsPage"
+             xmlns:models="clr-namespace:TodoItems.Services.Models;assembly=TodoItems.Services"
+             xmlns:viewmodels="clr-namespace:TodoItems.Services.ViewModels;assembly=TodoItems.Services"
+             x:DataType="viewmodels:TodoItemsViewModel"
+             Title="{Binding Title}">
+    <RefreshView
+        IsRefreshing="{Binding IsBusy}"
+        >
+        <CollectionView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:TodoItem">
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
+</ContentPage>
