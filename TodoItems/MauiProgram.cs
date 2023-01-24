@@ -1,4 +1,5 @@
 ﻿using TodoItems.Services;
+using TodoItems.Services.Services;
 using TodoItems.Views;
 
 namespace TodoItems;
@@ -24,6 +25,9 @@ public static class MauiProgram
 
 	private static void AddServices(this IServiceCollection services)
 	{
+		services.AddSingleton<INavigationHelper, NavigationHelper>();
+
+		// Pages
         services.AddSingleton<TodoItemsPage>();
         services.AddTransient<TodoItemPage>();
         services.AddSingleton<QuotesPage>();

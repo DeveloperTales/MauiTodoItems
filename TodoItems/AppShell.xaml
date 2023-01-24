@@ -10,16 +10,14 @@
     <FlyoutItem
         Title="Home"
         Route="home">
-        <Tab Title="Home">
-            <ShellContent
-                Title="Todos"
-                ContentTemplate="{DataTemplate views:TodoItemsPage}"
-                Route="todoItems"/>
-            <ShellContent
-                Title="Quotes"
-                ContentTemplate="{DataTemplate views:QuotesPage}"
-                Route="quotes"/>
-        </Tab>
+        <ShellContent
+            Title="Todos"
+            ContentTemplate="{DataTemplate views:TodoItemsPage}"
+            Route="todoItems"/>
+        <ShellContent
+            Title="Quotes"
+            ContentTemplate="{DataTemplate views:QuotesPage}"
+            Route="quotes"/>
     </FlyoutItem>
     <FlyoutItem
         Title="Settings">
@@ -27,15 +25,4 @@
             Title="Settings"
             ContentTemplate="{DataTemplate views:SettingsPage}" />
     </FlyoutItem>
-    
-    <ShellContent
-        Title="Todo Item"
-        ContentTemplate="{DataTemplate views:TodoItemPage}"
-        Route="todoItem" />
-
-    <ShellContent
-        Title="Quote"
-        ContentTemplate="{DataTemplate views:QuotePage}"
-        Route="quote" />
-
 </Shell>

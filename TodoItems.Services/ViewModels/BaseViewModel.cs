@@ -8,7 +8,7 @@ namespace TodoItems.Services.ViewModels
         [NotifyPropertyChangedFor(nameof(IsNotBusy))]
         bool isBusy;
         [ObservableProperty]
-        string title;
+        string? title;
         [ObservableProperty]
         bool isNotBusy;
     }
