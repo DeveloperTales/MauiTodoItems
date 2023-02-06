@@ -49,10 +49,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Fonts\fa-400.otf" />
+	  <None Remove="Resources\Fonts\fa-solid-900.otf" />
+	  <None Remove="Resources\Fonts\fa-solid-900.ttf" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <ProjectReference Include="..\TodoItems.Services\TodoItems.Services.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Resources\Styles\CustomStyles.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\QuotePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

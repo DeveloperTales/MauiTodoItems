@@ -1,5 +1,6 @@
 ﻿using TodoItems.Services.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
+using TodoItems.Services.Services;
 
 namespace TodoItems.Services
 {
@@ -12,6 +13,7 @@ namespace TodoItems.Services
             services.AddSingleton<QuotesViewModel>();
             services.AddTransient<QuoteViewModel>();
             services.AddSingleton<SettingsViewModel>();
+            services.AddSingleton<IDatabaseService, DatabaseService>();
         }
     }
 }

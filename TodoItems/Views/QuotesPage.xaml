@@ -2,13 +2,31 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TodoItems.Views.QuotesPage"
+             xmlns:models="clr-namespace:TodoItems.Services.Models;assembly=TodoItems.Services"
              xmlns:viewmodels="clr-namespace:TodoItems.Services.ViewModels;assembly=TodoItems.Services"
              x:DataType="viewmodels:QuotesViewModel"
              Title="{Binding Title}">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <RefreshView
+        IsRefreshing="{Binding IsBusy}"
+        >
+        <CollectionView>
+            <CollectionView.EmptyView>
+                <StackLayout Padding="20">
+                    <Image
+                        WidthRequest="100"
+                        HeightRequest="100">
+                        <Image.Source>
+                            <FontImageSource FontFamily="FAS" Glyph="&#xf03e;" />
+                        </Image.Source>
+                    </Image>
+                    <Label Style="{StaticResource noContentLabelStyle}" Text="No quotes please add some"/>
+                </StackLayout>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Quote">
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
 </ContentPage>
