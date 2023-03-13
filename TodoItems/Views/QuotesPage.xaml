@@ -12,7 +12,6 @@
         >
         <CollectionView
             ItemsSource="{Binding Quotes}"
-            ItemSizingStrategy="MeasureAllItems"
             >
             <CollectionView.EmptyView>
                 <StackLayout Padding="20">
