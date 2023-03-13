@@ -8,23 +8,51 @@
              Title="{Binding Title}">
     <RefreshView
         IsRefreshing="{Binding IsBusy}"
+        Command="{Binding LoadQuotesCommand}"
         >
-        <CollectionView>
+        <CollectionView
+            ItemsSource="{Binding Quotes}"
+            ItemSizingStrategy="MeasureAllItems"
+            >
             <CollectionView.EmptyView>
                 <StackLayout Padding="20">
                     <Image
                         WidthRequest="100"
                         HeightRequest="100">
                         <Image.Source>
-                            <FontImageSource FontFamily="FAS" Glyph="&#xf03e;" />
+                            <FontImageSource FontFamily="FAS" Glyph="&#xf03e;" Color="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
                         </Image.Source>
                     </Image>
-                    <Label Style="{StaticResource noContentLabelStyle}" Text="No quotes please add some"/>
+                    <Label
+                        Style="{StaticResource noContentLabelStyle}"
+                        Text="No quotes available"/>
                 </StackLayout>
             </CollectionView.EmptyView>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Quote">
-
+                    <Frame
+                        Margin="20, 10"
+                        Padding="20">
+                        <VerticalStackLayout Spacing="10">
+                            <Label
+                                Text="{Binding Description}"
+                                FontSize="Small"
+                                FontAttributes="Italic"
+                                />
+                            <Grid ColumnDefinitions="*, auto">
+                                <Label
+                                    Grid.Column="0"
+                                    Text="{Binding Author}"
+                                    FontSize="Medium"
+                                    FontFamily="OpenSansSemibold"/>
+                                <Label
+                                    Grid.Column="1"
+                                    VerticalTextAlignment="Center"
+                                    Text="{Binding Updated, StringFormat='{0:dd MMM yy}'}"
+                                    FontSize="11"/>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

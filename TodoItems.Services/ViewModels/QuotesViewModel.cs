@@ -9,14 +9,16 @@ namespace TodoItems.Services.ViewModels
     public partial class QuotesViewModel : BaseViewModel
     {
         private readonly INavigationHelper _navigationHelper;
+        private readonly IDatabaseService _databaseService;
 
         [ObservableProperty]
         ObservableCollection<Quote> quotes;
 
-        public QuotesViewModel(INavigationHelper navigationHelper)
+        public QuotesViewModel(INavigationHelper navigationHelper, IDatabaseService databaseService)
         {
             Title = "Quotes";
             _navigationHelper = navigationHelper;
+            _databaseService = databaseService;
             quotes = new ObservableCollection<Quote>();
         }
 
@@ -25,5 +27,13 @@ namespace TodoItems.Services.ViewModels
         {
             await _navigationHelper.GoToAsync("//quote");
         }
+
+        [RelayCommand]
+        void LoadQuotes()
+        {
+            quotes.Clear();
+            var randomQuotes = _databaseService.GetRandomQuotes().ToList();
+            randomQuotes.ForEach(Quotes.Add);
+        }        
     }
 }

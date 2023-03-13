@@ -1,6 +1,6 @@
 ﻿namespace TodoItems.Services.Models
 {
-    public class Quote
+    public record Quote()
     {
         public string? Id { get; set; }
         public string? Description { get; set; }

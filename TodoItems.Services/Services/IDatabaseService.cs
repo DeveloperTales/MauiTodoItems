@@ -9,7 +9,5 @@ public interface IDatabaseService
     public TodoItem AddUpdateTodoItem(TodoItem todoItem);
     public bool DeleteTodoItem(string id);
     public ICollection<Quote> GetQuotes();
-    public Quote GetQuote(string id);
-    public Quote AddUpdateQuote(Quote todoItem);
-    public bool DeleteQuote(string id);
+    public ICollection<Quote> GetRandomQuotes(int numberOfQuotes = 3);
 }

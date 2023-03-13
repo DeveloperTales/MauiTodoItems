@@ -1,6 +1,6 @@
 ﻿namespace TodoItems.Services.Models
 {
-    public class TodoItem
+    public record TodoItem ()
     {
         public string? Id { get; set; }
         public string? Title { get; set; }

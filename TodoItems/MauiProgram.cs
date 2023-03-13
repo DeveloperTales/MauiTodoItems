@@ -21,7 +21,7 @@ public static class MauiProgram
             });
 
 		builder.Services.AddServices();
-		builder.Services.AddTodoServices();
+		builder.Services.AddTodoServices(FileSystem.Current.AppDataDirectory);
 
         return builder.Build();
 	}

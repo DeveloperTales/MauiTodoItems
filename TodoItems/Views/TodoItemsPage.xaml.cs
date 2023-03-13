@@ -9,4 +9,13 @@ public partial class TodoItemsPage : ContentPage
 		InitializeComponent();
         BindingContext = viewModel;
     }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        if (BindingContext is TodoItemsViewModel viewModel)
+        {
+            viewModel.LoadTodoItemsCommand.Execute(null);
+        }
+    }
 }

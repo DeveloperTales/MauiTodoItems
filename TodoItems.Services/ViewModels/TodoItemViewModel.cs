@@ -7,7 +7,7 @@ namespace TodoItems.Services.ViewModels
 {
     public partial class TodoItemViewModel : BaseViewModel
     {
-        private readonly TodoItem _todoItem;
+        private TodoItem _todoItem;
 
         [ObservableProperty]
         string? todoTitle;
@@ -27,17 +27,11 @@ namespace TodoItems.Services.ViewModels
         public TodoItemViewModel() 
         {
             Title = "Todo Item";
-            _todoItem = new();
         }
 
         public void SetTodoItem(TodoItem todoItem)
         {
-            _todoItem.Id = todoItem.Id;
-            _todoItem.Title = todoItem.Title;
-            _todoItem.Description = todoItem.Description;
-            _todoItem.Created = todoItem.Created;
-            _todoItem.Completed = todoItem.Completed;
-            _todoItem.IsCompleted = todoItem.IsCompleted;
+            _todoItem = todoItem;
 
             TodoTitle = _todoItem.Title;
             TodoDescription = _todoItem.Description;
@@ -66,13 +60,13 @@ namespace TodoItems.Services.ViewModels
                 return;
             }
 
-            _todoItem.Title = TodoTitle;
+            /*_todoItem.Title = TodoTitle;
             _todoItem.Description = TodoDescription;
             _todoItem.IsCompleted = IsCompleted;
             if (_todoItem.Completed == null && _todoItem.IsCompleted) 
             {
                 _todoItem.Completed = DateTime.Now;
-            }
+            }*/
         }
     }
 }

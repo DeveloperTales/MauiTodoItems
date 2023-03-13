@@ -6,8 +6,16 @@
              xmlns:viewmodels="clr-namespace:TodoItems.Services.ViewModels;assembly=TodoItems.Services"
              x:DataType="viewmodels:TodoItemsViewModel"
              Title="{Binding Title}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem>
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="FAS" Glyph="&#x2b;" Color="{StaticResource White}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
     <RefreshView
         IsRefreshing="{Binding IsBusy}"
+        Command="{Binding LoadTodoItemsCommand}"
         >
         <CollectionView>
             <CollectionView.EmptyView>
@@ -16,7 +24,7 @@
                         WidthRequest="100"
                         HeightRequest="100">
                         <Image.Source>
-                            <FontImageSource FontFamily="FAS" Glyph="&#xf03e;" />
+                            <FontImageSource FontFamily="FAS" Glyph="&#xf03e;" Color="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}"/>
                         </Image.Source>
                     </Image>
                     <Label
