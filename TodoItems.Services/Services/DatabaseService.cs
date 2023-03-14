@@ -1,5 +1,4 @@
 ﻿using LiteDB;
-using System;
 using TodoItems.Services.Models;
 
 namespace TodoItems.Services.Services;
@@ -12,7 +11,7 @@ public class DatabaseService : IDatabaseService
 
     public DatabaseService(string appDirectory)
     {
-       _dbpath = Path.Combine(appDirectory, "todoitems.db");
+       _dbpath = Path.Combine(appDirectory, "todoitems4.db");
     }
     
     public TodoItem AddUpdateTodoItem(TodoItem todoItem)
@@ -29,8 +28,7 @@ public class DatabaseService : IDatabaseService
                 Created = DateTime.Now,
             };
 
-            collection.Insert(todoItem);
-            collection.EnsureIndex(x => x.Id);
+            collection.Insert(newTodoItem);
 
             return newTodoItem;
         }
@@ -63,7 +61,7 @@ public class DatabaseService : IDatabaseService
 
         var collection = db.GetCollection<TodoItem>(COLLECTION_TODOITEMS);
 
-        return collection.Query().ToList();
+        return collection.Query().OrderByDescending(t => t.Updated).ToList();
     }
 
     public ICollection<Quote> GetRandomQuotes(int numberOfQuotes = 3)

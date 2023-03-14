@@ -15,6 +15,9 @@ namespace TodoItems.Services.ViewModels
         [ObservableProperty]
         ObservableCollection<TodoItem> items;
 
+        [ObservableProperty]
+        TodoItem? selectedItem;
+
         public TodoItemsViewModel(INavigationHelper navigationHelper, IDatabaseService databaseService)
         {
             Title = "Todo";
@@ -26,13 +29,25 @@ namespace TodoItems.Services.ViewModels
         [RelayCommand]
         async Task CreateTodoItem()
         {
-            await _navigationHelper.GoToAsync("//todoItem");
+            var navigationParameter = new Dictionary<string, object>
+            {
+                { "TodoItem", new TodoItem() }
+            };
+            await _navigationHelper.GoToAsync("todoItem", true, navigationParameter);
         }
 
         [RelayCommand]
-        async Task UpdateTodoItem(TodoItem todoItem)
+        async Task UpdateTodoItem(TodoItem item)
         {
-            await _navigationHelper.GoToAsync("//todoItem");
+            if (item != null) 
+            {
+                var navigationParameter = new Dictionary<string, object>
+                {
+                    { "TodoItem", item }
+                };
+                await _navigationHelper.GoToAsync("todoItem", true, navigationParameter);
+                SelectedItem = null;
+            }
         }
 
         [RelayCommand]

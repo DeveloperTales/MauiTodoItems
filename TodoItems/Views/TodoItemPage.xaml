@@ -5,24 +5,36 @@
              xmlns:viewmodels="clr-namespace:TodoItems.Services.ViewModels;assembly=TodoItems.Services"
              x:DataType="viewmodels:TodoItemViewModel"
              Title="{Binding Title}">
-    <VerticalStackLayout Padding="10">
-        <Label 
-            Text="Todo Decription"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Entry
-            Margin="0,0,0,20"/>
-        <Grid 
-            
-            ColumnDefinitions="*, Auto"
-            RowDefinitions="Auto">
-            <Label 
-                Grid.Column="0"
-                Grid.Row="0"
-                Text="Is Completed: "/>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem            
+            Command="{Binding SaveTodoItemCommand}"
+            Text="Save">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="FAS" Glyph="&#xf0c7;" Color="{StaticResource White}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <VerticalStackLayout
+        Padding="20"
+        Spacing="10" >
+        <VerticalStackLayout Spacing="0">
+            <Label
+                Margin="10, 2"
+                Text="Title" />
+            <Entry
+                Text="{Binding TodoTitle}" />
+        </VerticalStackLayout>
+        <VerticalStackLayout Spacing="0">
+            <Label
+                Margin="10, 2"
+                Text="Decription" />
+            <Entry
+                Text="{Binding TodoDescription}" />
+        </VerticalStackLayout>
+        <HorizontalStackLayout Spacing="10">
             <CheckBox
-                Grid.Column="1"
-                Grid.Row="0">
+                IsChecked="{Binding IsCompleted}"
+                HorizontalOptions="EndAndExpand" >
                 <VisualStateManager.VisualStateGroups>
                     <VisualStateGroup x:Name="CommonStates">
                         <VisualState x:Name="Normal">
@@ -43,6 +55,9 @@
                     </VisualStateGroup>
                 </VisualStateManager.VisualStateGroups>
             </CheckBox>
-        </Grid>
+            <Label
+                VerticalTextAlignment="Center"
+                Text="Completed" />
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

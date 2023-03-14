@@ -2,18 +2,18 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using TodoItems.Services.Models;
+using TodoItems.Services.Services;
 
 namespace TodoItems.Services.ViewModels
 {
     public partial class TodoItemViewModel : BaseViewModel
     {
-        private TodoItem _todoItem;
+        private readonly IDatabaseService _databaseService;
+        private readonly INavigationHelper _navigationHelper;
+        private TodoItem? _todoItem;
 
         [ObservableProperty]
         string? todoTitle;
-
-        [ObservableProperty]
-        bool titleHasError;
 
         [ObservableProperty]
         string? todoDescription;
@@ -24,8 +24,10 @@ namespace TodoItems.Services.ViewModels
         [ObservableProperty]
         bool isCompleted;
 
-        public TodoItemViewModel() 
+        public TodoItemViewModel(INavigationHelper navigationHelper, IDatabaseService databaseService) 
         {
+            _navigationHelper = navigationHelper;
+            _databaseService = databaseService;
             Title = "Todo Item";
         }
 
@@ -42,31 +44,36 @@ namespace TodoItems.Services.ViewModels
         {
             if (string.IsNullOrWhiteSpace(value))
             {
-                TitleHasError = true;
                 SaveCanExecute = false;
             }
             else
             {
-                TitleHasError = false;
                 SaveCanExecute = true;
             }
         }
 
-        [RelayCommand(CanExecute = nameof(SaveCanExecute))]
+        [RelayCommand]
         async Task SaveTodoItem()
         {
-            if (string.IsNullOrWhiteSpace(todoTitle))
+            if (_todoItem == null)
             {
                 return;
             }
 
-            /*_todoItem.Title = TodoTitle;
+            _todoItem.Title = TodoTitle;
             _todoItem.Description = TodoDescription;
             _todoItem.IsCompleted = IsCompleted;
-            if (_todoItem.Completed == null && _todoItem.IsCompleted) 
+            _todoItem.Updated = DateTime.Now;
+
+            _databaseService.AddUpdateTodoItem(_todoItem);
+            try
             {
-                _todoItem.Completed = DateTime.Now;
-            }*/
+                await _navigationHelper.GoToAsync("..");
+            }
+            catch (Exception ex)
+            {
+                var er = ex.ToString();
+            }
         }
     }
 }

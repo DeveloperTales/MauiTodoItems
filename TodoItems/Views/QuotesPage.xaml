@@ -35,6 +35,7 @@
                         <VerticalStackLayout Spacing="10">
                             <Label
                                 Text="{Binding Description}"
+                                Style="{StaticResource secondaryLabel}"
                                 FontSize="Small"
                                 FontAttributes="Italic"
                                 />
@@ -46,6 +47,7 @@
                                     FontFamily="OpenSansSemibold"/>
                                 <Label
                                     Grid.Column="1"
+                                    Style="{StaticResource secondaryLabel}"
                                     VerticalTextAlignment="Center"
                                     Text="{Binding Updated, StringFormat='{0:dd MMM yy}'}"
                                     FontSize="11"/>

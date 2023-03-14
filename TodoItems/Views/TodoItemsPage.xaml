@@ -7,7 +7,8 @@
              x:DataType="viewmodels:TodoItemsViewModel"
              Title="{Binding Title}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem>
+        <ToolbarItem
+            Command="{Binding CreateTodoItemCommand}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="FAS" Glyph="&#x2b;" Color="{StaticResource White}"/>
             </ToolbarItem.IconImageSource>
@@ -17,24 +18,64 @@
         IsRefreshing="{Binding IsBusy}"
         Command="{Binding LoadTodoItemsCommand}"
         >
-        <CollectionView>
+        <CollectionView
+            ItemsSource="{Binding Items}"
+            SelectionMode="Single"
+            SelectionChangedCommand="{Binding UpdateTodoItemCommand}"
+            SelectionChangedCommandParameter="{Binding Path=SelectedItem, Source={RelativeSource Self}}"
+            >
             <CollectionView.EmptyView>
-                <StackLayout Padding="20">
+                <VerticalStackLayout Padding="20">
                     <Image
                         WidthRequest="100"
                         HeightRequest="100">
                         <Image.Source>
-                            <FontImageSource FontFamily="FAS" Glyph="&#xf03e;" Color="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}"/>
+                            <FontImageSource
+                                FontFamily="FAS"
+                                Glyph="&#xf03e;"
+                                Color="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}"/>
                         </Image.Source>
                     </Image>
                     <Label
                         Style="{StaticResource noContentLabelStyle}"
                         Text="No todo items please add some"/>
-                </StackLayout>
+                </VerticalStackLayout>
             </CollectionView.EmptyView>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:TodoItem">
-
+                    <Grid
+                        Margin="10, 0"
+                        ColumnDefinitions="auto, *, auto"
+                        ColumnSpacing="10">
+                        <CheckBox
+                            IsChecked="{Binding IsCompleted}"
+                            VerticalOptions="Center"
+                            Grid.Column="0" />
+                        <VerticalStackLayout
+                            Grid.Column="1">
+                            <Label
+                                Text="{Binding Title}"
+                                FontSize="Medium"
+                                FontFamily="OpenSansSemibold"/>
+                            <Label
+                                Text="{Binding Description}"
+                                Style="{StaticResource secondaryLabel}"
+                                FontSize="Small" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout
+                            VerticalOptions="CenterAndExpand"
+                            Grid.Column="2">
+                            <Label 
+                                Style="{StaticResource secondaryLabel}"
+                                FontSize="12"
+                                Text="Updated"/>
+                            <Label
+                                Style="{StaticResource secondaryLabel}"
+                                Text="{Binding Updated, StringFormat='{0:dd MMM yy}'}"
+                                VerticalTextAlignment="Center"                            
+                                FontSize="11" />
+                        </VerticalStackLayout>
+                    </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
