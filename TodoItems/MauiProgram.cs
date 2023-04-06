@@ -34,7 +34,5 @@ public static class MauiProgram
         services.AddSingleton<TodoItemsPage>();
         services.AddTransient<TodoItemPage>();
         services.AddSingleton<QuotesPage>();
-        services.AddTransient<QuotePage>();
-		services.AddSingleton<SettingsPage>();
     }
 }

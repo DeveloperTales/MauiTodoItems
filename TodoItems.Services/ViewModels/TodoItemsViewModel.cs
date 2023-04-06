@@ -26,6 +26,15 @@ namespace TodoItems.Services.ViewModels
             items = new ObservableCollection<TodoItem>();
         }
 
+        public void UpdateTodoItemCompleted(TodoItem todoItem, bool isCompleted)
+        {
+            todoItem.IsCompleted = isCompleted;
+            todoItem.Updated = DateTime.Now;
+
+            _databaseService.AddUpdateTodoItem(todoItem);
+            LoadTodoItems();
+        }
+
         [RelayCommand]
         async Task CreateTodoItem()
         {
@@ -33,7 +42,7 @@ namespace TodoItems.Services.ViewModels
             {
                 { "TodoItem", new TodoItem() }
             };
-            await _navigationHelper.GoToAsync("todoItem", true, navigationParameter);
+            await _navigationHelper.GoToAsync("/todoItem", true, navigationParameter);
         }
 
         [RelayCommand]
@@ -45,7 +54,7 @@ namespace TodoItems.Services.ViewModels
                 {
                     { "TodoItem", item }
                 };
-                await _navigationHelper.GoToAsync("todoItem", true, navigationParameter);
+                await _navigationHelper.GoToAsync("/todoItem", true, navigationParameter);
                 SelectedItem = null;
             }
         }
@@ -53,9 +62,14 @@ namespace TodoItems.Services.ViewModels
         [RelayCommand]
         void LoadTodoItems()
         {
-            items.Clear();
-            var randomQuotes = _databaseService.GetTodoItems().ToList();
-            randomQuotes.ForEach(Items.Add);
+            if (!IsBusy)
+            {
+                IsBusy = true;
+                items.Clear();
+                var randomQuotes = _databaseService.GetTodoItems().ToList();
+                randomQuotes.ForEach(Items.Add);
+                IsBusy = false;
+            }
         }
     }
 }

@@ -12,8 +12,6 @@ namespace TodoItems.Services
             services.AddSingleton<TodoItemsViewModel>();
             services.AddTransient<TodoItemViewModel>();
             services.AddSingleton<QuotesViewModel>();
-            services.AddTransient<QuoteViewModel>();
-            services.AddSingleton<SettingsViewModel>();
         }
     }
 }

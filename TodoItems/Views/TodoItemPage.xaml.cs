@@ -17,6 +17,10 @@ public partial class TodoItemPage : ContentPage
             {
                 viewModel.SetTodoItem(todoItem);
             }
+            if (string.IsNullOrWhiteSpace(todoItem.Id))
+            {
+                ToolbarItems.RemoveAt(0);
+            }
         }
     }
 

@@ -19,9 +19,6 @@ namespace TodoItems.Services.ViewModels
         string? todoDescription;
 
         [ObservableProperty]
-        bool saveCanExecute;
-
-        [ObservableProperty]
         bool isCompleted;
 
         public TodoItemViewModel(INavigationHelper navigationHelper, IDatabaseService databaseService) 
@@ -40,18 +37,6 @@ namespace TodoItems.Services.ViewModels
             IsCompleted = _todoItem.IsCompleted;
         }
 
-        partial void OnTodoTitleChanged(string? value)
-        {
-            if (string.IsNullOrWhiteSpace(value))
-            {
-                SaveCanExecute = false;
-            }
-            else
-            {
-                SaveCanExecute = true;
-            }
-        }
-
         [RelayCommand]
         async Task SaveTodoItem()
         {
@@ -66,14 +51,19 @@ namespace TodoItems.Services.ViewModels
             _todoItem.Updated = DateTime.Now;
 
             _databaseService.AddUpdateTodoItem(_todoItem);
-            try
+            await _navigationHelper.GoToAsync("..");
+        }
+
+        [RelayCommand]
+        async Task DeleteTodoItem()
+        {
+            if (_todoItem == null || string.IsNullOrWhiteSpace(_todoItem.Id))
             {
-                await _navigationHelper.GoToAsync("..");
+                return;
             }
-            catch (Exception ex)
-            {
-                var er = ex.ToString();
-            }
+
+            _databaseService.DeleteTodoItem(_todoItem.Id);
+            await _navigationHelper.GoToAsync("..");
         }
     }
 }

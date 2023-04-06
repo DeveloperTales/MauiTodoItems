@@ -6,10 +6,7 @@
     xmlns:local="clr-namespace:TodoItems"
     xmlns:views="clr-namespace:TodoItems.Views"
     >
-
-    <FlyoutItem
-        Title="Home"
-        Route="home">
+    <Tab Title="TodoItems">
         <ShellContent
             Title="Todos"
             ContentTemplate="{DataTemplate views:TodoItemsPage}"
@@ -18,11 +15,5 @@
             Title="Quotes"
             ContentTemplate="{DataTemplate views:QuotesPage}"
             Route="quotes"/>
-    </FlyoutItem>
-    <FlyoutItem
-        Title="Settings">
-        <ShellContent
-            Title="Settings"
-            ContentTemplate="{DataTemplate views:SettingsPage}" />
-    </FlyoutItem>
+    </Tab>
 </Shell>

@@ -6,6 +6,23 @@
              xmlns:viewmodels="clr-namespace:TodoItems.Services.ViewModels;assembly=TodoItems.Services"
              x:DataType="viewmodels:TodoItemsViewModel"
              Title="{Binding Title}">
+    <ContentPage.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="{StaticResource Gray400}" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem
             Command="{Binding CreateTodoItemCommand}">
@@ -15,12 +32,14 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
     <RefreshView
+        Margin="20"
         IsRefreshing="{Binding IsBusy}"
         Command="{Binding LoadTodoItemsCommand}"
         >
         <CollectionView
             ItemsSource="{Binding Items}"
             SelectionMode="Single"
+            SelectedItem="{Binding SelectedItem}"
             SelectionChangedCommand="{Binding UpdateTodoItemCommand}"
             SelectionChangedCommandParameter="{Binding Path=SelectedItem, Source={RelativeSource Self}}"
             >
@@ -44,12 +63,13 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:TodoItem">
                     <Grid
-                        Margin="10, 0"
                         ColumnDefinitions="auto, *, auto"
                         ColumnSpacing="10">
                         <CheckBox
+                            BindingContext="{Binding .}"
                             IsChecked="{Binding IsCompleted}"
                             VerticalOptions="Center"
+                            CheckedChanged="UpdateCompleted"
                             Grid.Column="0" />
                         <VerticalStackLayout
                             Grid.Column="1">

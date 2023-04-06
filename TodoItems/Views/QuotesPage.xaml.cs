@@ -8,14 +8,6 @@ public partial class QuotesPage : ContentPage
 	{
 		InitializeComponent();
         BindingContext = viewModel;
-    }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-        if (BindingContext is QuotesViewModel viewModel)
-        {
-            viewModel.LoadQuotesCommand.Execute(null);
-        }
+        viewModel.LoadQuotesCommand.Execute(null);
     }
 }

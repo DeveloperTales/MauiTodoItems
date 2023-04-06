@@ -3,16 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TodoItems.Views.TodoItemPage"
              xmlns:viewmodels="clr-namespace:TodoItems.Services.ViewModels;assembly=TodoItems.Services"
+             xmlns:myControls="clr-namespace:TodoItems.Views.CutomViews;assembly=TodoItems"
              x:DataType="viewmodels:TodoItemViewModel"
              Title="{Binding Title}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem            
+        <myControls:BindableToolbarItem
+            Command="{Binding DeleteTodoItemCommand}"
+            IsVisible="{Binding DeleteCanExecute}"
+            Text="Delete">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="FAS" Glyph="&#xf1f8;" Color="{StaticResource White}"/>
+            </ToolbarItem.IconImageSource>
+        </myControls:BindableToolbarItem>
+        <myControls:BindableToolbarItem            
             Command="{Binding SaveTodoItemCommand}"
+            IsVisible="{Binding SaveCanExecute}"
             Text="Save">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="FAS" Glyph="&#xf0c7;" Color="{StaticResource White}"/>
             </ToolbarItem.IconImageSource>
-        </ToolbarItem>
+        </myControls:BindableToolbarItem>
     </ContentPage.ToolbarItems>
     <VerticalStackLayout
         Padding="20"
