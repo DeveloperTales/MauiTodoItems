@@ -7,22 +7,20 @@
              x:DataType="viewmodels:TodoItemViewModel"
              Title="{Binding Title}">
     <ContentPage.ToolbarItems>
-        <myControls:BindableToolbarItem
+        <ToolbarItem
             Command="{Binding DeleteTodoItemCommand}"
-            IsVisible="{Binding DeleteCanExecute}"
             Text="Delete">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="FAS" Glyph="&#xf1f8;" Color="{StaticResource White}"/>
             </ToolbarItem.IconImageSource>
-        </myControls:BindableToolbarItem>
-        <myControls:BindableToolbarItem            
+        </ToolbarItem>
+        <ToolbarItem          
             Command="{Binding SaveTodoItemCommand}"
-            IsVisible="{Binding SaveCanExecute}"
             Text="Save">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="FAS" Glyph="&#xf0c7;" Color="{StaticResource White}"/>
             </ToolbarItem.IconImageSource>
-        </myControls:BindableToolbarItem>
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
     <VerticalStackLayout
         Padding="20"

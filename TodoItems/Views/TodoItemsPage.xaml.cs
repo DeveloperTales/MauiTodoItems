@@ -19,16 +19,4 @@ public partial class TodoItemsPage : ContentPage
             viewModel.LoadTodoItemsCommand.Execute(null);
         }
     }
-
-    private void UpdateCompleted(object sender, CheckedChangedEventArgs e)
-    {
-        var checkBoxContext = ((View)sender).BindingContext;
-        if (checkBoxContext is TodoItem todoItem)
-        {
-            if (BindingContext is TodoItemsViewModel viewModel)
-            {
-                viewModel.UpdateTodoItemCompleted(todoItem, e.Value);
-            }
-        }
-    }
 }

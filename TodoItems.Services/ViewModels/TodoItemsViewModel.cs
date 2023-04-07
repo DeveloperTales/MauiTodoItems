@@ -24,16 +24,7 @@ namespace TodoItems.Services.ViewModels
             _navigationHelper = navigationHelper;
             _databaseService = databaseService;
             items = new ObservableCollection<TodoItem>();
-        }
-
-        public void UpdateTodoItemCompleted(TodoItem todoItem, bool isCompleted)
-        {
-            todoItem.IsCompleted = isCompleted;
-            todoItem.Updated = DateTime.Now;
-
-            _databaseService.AddUpdateTodoItem(todoItem);
-            LoadTodoItems();
-        }
+        }        
 
         [RelayCommand]
         async Task CreateTodoItem()
@@ -62,14 +53,28 @@ namespace TodoItems.Services.ViewModels
         [RelayCommand]
         void LoadTodoItems()
         {
-            if (!IsBusy)
-            {
-                IsBusy = true;
-                items.Clear();
-                var randomQuotes = _databaseService.GetTodoItems().ToList();
-                randomQuotes.ForEach(Items.Add);
-                IsBusy = false;
-            }
+            IsBusy = true;
+            items.Clear();
+            var randomQuotes = _databaseService.GetTodoItems().ToList();
+            randomQuotes.ForEach(Items.Add);
+            IsBusy = false;
+        }
+
+        [RelayCommand]
+        void TestMe(object obj)
+        {
+            var entered = obj;
+        }
+
+        [RelayCommand]
+        void UpdateTodoItemCompleted(object obj)
+        {
+            var todoItem = (TodoItem)obj;
+            todoItem.IsCompleted = !todoItem.IsCompleted;
+            todoItem.Updated = DateTime.Now;
+
+            _databaseService.AddUpdateTodoItem(todoItem);
+            LoadTodoItems();
         }
     }
 }
